@@ -28,7 +28,7 @@ void pipe_close(int in_index, int out_index);
 int main()
 {
     char *input;
-    int flag = 0;
+    int flag = 0, len;
     size_t input_size = 0;
     setenv("PATH", "bin:.", 1);
 
@@ -41,7 +41,7 @@ int main()
     while (1)
     {
         fprintf(stdout, "%% ");
-        if (getline(&input, &input_size, stdin) != -1)
+        if ((len = getline(&input, &input_size, stdin)) != -1)
         {
             input[len - 1] = '\0';          // eliminate the newline char
             parse(input);
