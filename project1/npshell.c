@@ -27,10 +27,9 @@ void pipe_close(int in_index, int out_index);
 
 int main()
 {
-    // char input[15001];
-    char *input = NULL;
+    char *input;
     int flag = 0;
-    size_t len = 0;
+    size_t input_size = 0;
     setenv("PATH", "bin:.", 1);
 
     for (size_t i = 0; i < 1001; i++)
@@ -41,13 +40,16 @@ int main()
 
     while (1)
     {
-        memset(input, '\0', 15001);
         fprintf(stdout, "%% ");
-        if (getline(&input, &len, stdin) != -1)
+        if (getline(&input, &input_size, stdin) != -1)
+        {
+            input[len - 1] = '\0';          // eliminate the newline char
             parse(input);
+        }
         else
             break;
     }
+    free(input);
 
     return 0;
 }
