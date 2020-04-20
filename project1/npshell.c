@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define DEBUG 0
 #define EXIT 400
@@ -116,7 +117,7 @@ void parse(char *str)
             int out_file_fd = open(pch, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
             if (out_file_fd < 0)
-                cout << "open file err" << endl;
+                fprintf(stderr, "open file err\n");
 
             in_pipe_index = pipe_index;
 
@@ -254,7 +255,6 @@ int pipe_handler(int outPipe)
     {
         while (pipe(pipefd[out]) < 0)
             ;
-        //cout << "create pipe: " << pipefd[out][0] << pipefd[out][1] << endl;
     }
     return out;
 }
