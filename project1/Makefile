@@ -1,4 +1,4 @@
-ALL: npshell.cpp
-	g++ npshell.cpp -o npshell
+ALL: npshell.c
+	gcc npshell.c -o npshell
 clean:
 	rm -f npshell

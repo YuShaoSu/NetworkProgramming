@@ -25,11 +25,13 @@ int pipe_index_inc();
 void child_handler(int signo);
 void pipe_close(int in_index, int out_index);
 
+
+// to-do  the position of '% '
 int main()
 {
-    char *input;
-    int flag = 0, len;
-    size_t input_size = 0;
+    char input[15001];
+    // int flag = 0, len;
+    // size_t input_size = 0;
     setenv("PATH", "bin:.", 1);
 
     for (size_t i = 0; i < 1001; i++)
@@ -41,15 +43,15 @@ int main()
     while (1)
     {
         fprintf(stdout, "%% ");
-        if ((len = getline(&input, &input_size, stdin)) != -1)
+        memset(input, '0', 15001);
+        if (fgets(input, 257, stdin) != NULL)
         {
-            input[len - 1] = '\0';          // eliminate the newline char
+            input[strlen(input) - 1] = '\0';          // eliminate the newline char
             parse(input);
         }
         else
             break;
     }
-    free(input);
 
     return 0;
 }
